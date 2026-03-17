@@ -61,7 +61,7 @@
     <PropertyGroup>
         <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
              while your local StS2 version will be for your specific platform. -->
-        <NoWarn>$(NoWarn);MSB3270</NoWarn> 
+        <NoWarn>$(NoWarn);MSB3270</NoWarn>
     </PropertyGroup>
 
     <ItemGroup Condition="Exists('$(Sts2DataDir)')" >
@@ -95,7 +95,7 @@
 
     <ItemGroup>
         <None Include=".gitignore" />
-        <None Include="DisableStarsInTimeline.json" />
+        <None Include="mod_manifest.json" />
         <None Include="project.godot"/>
         <None Include="DisableStarsInTimeline/**" />
     </ItemGroup>
@@ -106,7 +106,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
-    
+
     <Target Name="CheckDependencyPaths" >
         <Error
                 Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'"
@@ -119,7 +119,6 @@
     <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
         <Message Text="Copying .dll and manifest to mods folder." Importance="high" />
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
-        <Copy SourceFiles="DisableStarsInTimeline.json" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
         <Message Text="Copying BaseLib to mods folder." Importance="high" />
         <ItemGroup>
             <BaseLibFiles Include="$(NuGetPackageRoot)/alchyr.sts2.baselib/**/lib/**/BaseLib.dll;$(NuGetPackageRoot)/alchyr.sts2.baselib/**/Content/BaseLib.pck;$(NuGetPackageRoot)/alchyr.sts2.baselib/**/Content/BaseLib.json;"/>
