@@ -1,0 +1,11 @@
+{
+  "id": "DisableStarsInTimeline",
+  "name": "DisableStarsInTimeline",
+  "author": "Indi",
+  "description": "Disables the moving stars in the background of the timeline page",
+  "version": "v1.0.0",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": ["BaseLib"],
+  "affects_gameplay": false
+}
