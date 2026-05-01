@@ -8,26 +8,26 @@ public partial class MainFile : Node
 {
     public const string ModId = "DisableStarsInTimeline";
 
-    static SceneTree? tree;
-
-    static void Initialize()
+    public static void Initialize()
     {
-        tree = Engine.GetMainLoop() as SceneTree;
-        if (tree is not null)
+        if (Engine.GetMainLoop() is SceneTree tree)
         {
             tree.NodeAdded += OnNodeAdded;
         }
     }
 
-    static async void OnNodeAdded(Node node)
+    private static async void OnNodeAdded(Node node)
     {
         if (
-            tree is null
-            || node is not GpuParticles2D particles
-            || particles.GetParent().Name != "TimelineScreen"
+            node is not GpuParticles2D particles
+            || (
+                particles.GetParent().Name != "TimelineScreen"
                 && (particles.Name == "StarsBg" || particles.Name == "StarsFg")
+            )
         )
+        {
             return;
+        }
 
         particles.Visible = false;
     }
